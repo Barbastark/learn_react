@@ -1,0 +1,8 @@
+
+/*** Section1 ***/
+
+ - Using arrow functions for class methods is benefitial since they don't rebind this. 
+ - By using them there is no need to bind class methods in the constructor.
+ - React.Fragment is used as a container for html elements to avoid cluttering of the DOM.
+
+
