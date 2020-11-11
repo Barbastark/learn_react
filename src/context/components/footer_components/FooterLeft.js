@@ -4,7 +4,6 @@ const FooterLeft = props => {
     return(
         <section className={`footer-no-links ${props.theme}-theme`}>
             <h3>Kontakt</h3>
-            <hr />
             <ul>
                 <li>Brynolfs Bageri</li>
                 <li>Pillesnoppvägen 1</li>

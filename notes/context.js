@@ -105,7 +105,7 @@
   * ------------------
   */
  import Button from "./Button"
- // Only when consumer is nessecary (passing context as props to component)
+ // Only when consumer is used (passing context as props to component)
  import {ThemeContextConsumer} from "./themeContext"
 
  function App() {

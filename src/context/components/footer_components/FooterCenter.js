@@ -4,7 +4,6 @@ const FooterCenter = props => {
     return(
         <section className={`footer-component ${props.theme}-theme`}>
             <h3>Länkar</h3>
-            <hr />
             <ul>
                 <li><a href="#">Hem</a></li>
                 <li><a href="#">Produkter</a></li>

@@ -4,7 +4,6 @@ const FooterRight = props => {
     return(
         <section className={`footer-component ${props.theme}-theme`}>
             <h3>En meningslös meny</h3>
-            <hr />
             <ul>
                 <li><a href="#">Link1</a></li>
                 <li><a href="#">Link2</a></li>

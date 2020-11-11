@@ -1,0 +1,128 @@
+html {
+    font-size: 10px
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+#site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-content {
+    flex: 1;
+}
+
+#site-heaader, footer {
+    padding: 2rem;
+}
+
+#site-heaader h2 {
+    font-size: 5rem;
+    text-align: center;
+}
+
+button {
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 3px;
+    margin: 1rem;
+    outline: none;
+}
+
+button.dark-theme {
+    border: 1px solid whitesmoke;
+}
+
+.dark-theme {
+    background-color: #333333;
+    color: whitesmoke;
+}
+
+.light-theme {
+    background-color: whitesmoke;
+    color: #333333;
+}
+
+/***** Footer *****/
+.footer-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    max-width: 160rem;
+    margin: 0 auto;
+}
+
+.footer-component,
+.footer-no-links
+{
+    width: 25%;
+}
+
+.footer-component h3, 
+.footer-component li a,
+.footer-no-links h3,
+.footer-no-links li
+{
+    text-align: center;
+}
+
+.footer-component h3,
+.footer-no-links h3
+{
+    font-size: 1.5rem;
+    border-bottom: 1px dotted #333;
+    margin: 0;
+    padding: 1.5rem 0; 
+}
+
+.dark-theme .footer-component h3,
+.dark-theme .footer-no-links h3
+{
+    border-bottom: 1px dotted whitesmoke;
+}
+
+.footer-component ul,
+.footer-no-links ul 
+{
+    list-style: none;
+    padding: 0;
+}
+
+.footer-component a {
+    font-size: 1.6rem;
+    text-decoration: none;
+    display: block;
+    padding: 1rem 0 .5rem 0;
+    
+}
+
+.dark-theme .footer-component a,
+.dark-theme .footer-no-links a 
+{
+    color: whitesmoke;
+}
+
+.light-theme .footer-component a,
+.light-theme .footer-no-links a 
+{
+    color: #333;
+}
+
+.dark-theme .footer-component a:hover {
+    color: #ccc;
+}
+
+.footer-no-links li {
+    font-size: 1.6rem;
+    padding: 1rem 0 .5rem 0;
+}
