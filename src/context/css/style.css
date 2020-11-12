@@ -19,7 +19,7 @@ body {
 }
 
 .site-content {
-    flex: 1;
+    flex-grow: 1;
 }
 
 #site-heaader, footer {
@@ -55,9 +55,9 @@ button.dark-theme {
 
 /***** Footer *****/
 .footer-content {
-    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: stretch;
     max-width: 160rem;
     margin: 0 auto;
 }
@@ -126,3 +126,15 @@ button.dark-theme {
     font-size: 1.6rem;
     padding: 1rem 0 .5rem 0;
 }
+
+@media only screen and (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+    }
+    .footer-component,
+    .footer-no-links
+    {
+        width: 100%;
+    }
+    
+  }
