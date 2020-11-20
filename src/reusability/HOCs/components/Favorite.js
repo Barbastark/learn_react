@@ -2,14 +2,15 @@ import React from "react"
 import {withToggler} from "../HOCs/withToggler"
 
 function Favorite(props) {
+    const {on, toggle} = props;
     return (
         <div>
             <h3>Click heart to favorite</h3>
             <h1>
                 <span 
-                    onClick={props.toggle}
+                    onClick={toggle}
                 >
-                    {props.on ? "❤️" : "♡"}
+                    {on ? "❤️" : "♡"}
                 </span>
             </h1>
         </div>
