@@ -12,7 +12,8 @@
  * - The function is used to manipulate state.  
  */
 
-/***** Example using primitive data types *****/
+{
+    /***** Example using primitive data types *****/
 
 /* 
 Array destructuring is used to strip of state and set count function 
@@ -71,6 +72,7 @@ function App() {
 }
 
 export default App
+}
 
 /**
  * ---------------------
@@ -95,15 +97,206 @@ export default App
  *   prevents the rerender of the component from entering an infinite
  *   loop.    
  */
+{
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setCount(prevCount => prevCount + 1)
+        }, 1000)
+        // Cleanup function. Will run when component is about to unmount. 
+        return () => clearInterval(intervalId) 
+    }, []) // Passing empty array useEffect will only run once when the component mounts to the screen
 
-useEffect(() => {
-    const intervalId = setInterval(() => {
-        setCount(prevCount => prevCount + 1)
-    }, 1000)
-    // Cleanup function. Will run when component is about to unmount. 
-    return () => clearInterval(intervalId) 
-}, []) // Passing empty array useEffect will only run once when the component mounts to the screen
+    useEffect(() => {
+        setColor(randomcolor())
+    }, [count]) // Watches for changes in count variable. useEffect will run everytime count changes. 
+}
 
-useEffect(() => {
-    setColor(randomcolor())
-}, [count]) // Watches for changes in count variable. useEffect will run everytime count changes. 
+/**
+ * ------------------
+ * ----- useRef -----
+ * ------------------
+ * 
+ * - Used to access a dom node and make imperative changes to it.
+ * 
+ */
+{
+    // Create new ref
+    const inputRef = useRef(null)
+
+    // Call the focus method to add focus to the element.
+    inputRef.current.focus()
+
+    // Adding refs to elements
+    <input ref={inputRef} />
+}
+/**
+ * ----------------------
+ * ----- useContext -----
+ * ----------------------
+ */
+
+{
+    /**
+     * ----------------------------------------------
+     * ----- themeContext.js useContext version -----
+     * ----------------------------------------------
+     * 
+     * 1. No need to destructure Provider and Consumer
+     *    since the entire object needs to be exported.
+     * 
+     * 2. Since Provider isn't destructured anymore.
+     * 
+     * 3. Exporting entire Context object instead of
+     *    exporting the Consumer.    
+     */
+
+    // Class based component
+    const ThemeContext = React.createContext() // #1
+
+    class ThemeContextProvider extends Component {
+        state = {
+            theme: "dark"
+        }
+        
+        toggleTheme = () => {
+            this.setState(prevState => {
+                return {
+                    theme: prevState.theme === "light" ? "dark" : "light"
+                }
+            })
+        }
+        
+        render() {
+            return (
+                <ThemeContext.Provider // #2
+                    value={{theme: this.state.theme, toggleTheme: this.toggleTheme}}
+                >
+                    {this.props.children}
+                </ThemeContext.Provider>
+            )
+        }
+    }
+
+    export {ThemeContextProvider, ThemeContext} // #3
+
+    // Functional Component
+    import React, {useState} from "react"
+    const ThemeContext = React.createContext()
+
+    function ThemeContextProvider(props) {
+        const [ theme, setTheme ] = useState("dark");
+            
+        const toggleTheme = () => {
+            setTheme(prevTheme => prevTheme === "light" ? "dark" : "light")
+        }
+        
+        return (
+            <ThemeContext.Provider value={ {theme, toggleTheme } }>
+                {props.children}
+            </ThemeContext.Provider>
+        )
+    }
+
+    export {ThemeContextProvider, ThemeContext}
+
+    /**
+     * ----------------------------------------
+     * ----- Header.js useContext version -----
+     * ----------------------------------------
+     * 
+     * 1. Import useContext method
+     * 
+     * 2. Importing entire Context object instead of the Consumer since 
+     *    useContext requires the context object as a parameter.
+     * 
+     * 3. Pass context to useContext method
+     * 
+     *    3.1. Passing ThemeContext to useContext and destructure the 
+     *         theme property from the object returned by themeContext
+     *    3.2 Assign object returned by themeContext to variable.  
+     * 
+     * 4. No need for Consumer and renderProps anymore haha!        
+     */
+
+    import React, {useContext} from "react" // #1
+    import {ThemeContext} from "./themeContext" // #2
+
+    function Header(props) {
+        const { theme } = useContext(ThemeContext) // alt 1 #3 
+        const context = useContext(ThemeContext) // alt 2 #3.1
+        return (
+            /*<ThemeContextConsumer>
+                {context => (*/
+                    
+                    // #4
+                    <header className={`${theme}-theme`}> 
+                        <h2>{theme === "light" ? "Light" : "Dark"} Theme</h2>
+                    </header>
+
+                /*)}
+            </ThemeContextConsumer>*/
+        )    
+    }
+
+    export default Header
+}
+/**
+ * ------------------------
+ * ----- Custom Hooks -----
+ * ------------------------
+ * 
+ * - A pattern that has emerged and not a built-in part of react.
+ * 
+ * - Can be used to replace render-props, HOCs and children.
+ * 
+ * - Anytime you need logic to be reused across the app custom
+ *   hooks can be used for that.
+ * 
+ */
+{
+    /**
+     * ---------------------------
+     * ----- Toggler Example -----
+     * ---------------------------
+     */
+
+    // useToggler.js
+    import {useState} from "react" // No need for react since no JSX is rendered
+
+    function useToggler(defaultOnValue = false) {
+        
+        const [isToggledOn, setIsToggledOn] = useState(defaultOnValue)
+        
+        function toggle() {
+            setIsToggledOn(prev => !prev)
+        }
+        
+        return [isToggledOn, toggle]
+    }
+
+    export default useToggler
+
+    // Favorite.js
+    import React from "react"
+    import useToggler from "./useToggler"
+
+    function Favorite(props) {
+        const [isFavorited, toggle] = useToggler(false)
+        
+        return (
+            <div>
+                <h3>Click heart to favorite</h3>
+                <h1>
+                    <span 
+                        onClick={toggle}
+                    >
+                        {isFavorited ? "❤️" : "♡"}
+                    </span>
+                </h1>
+            </div>
+        ) 
+    }
+
+    export default Favorite
+}
+
