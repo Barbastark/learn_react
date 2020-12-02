@@ -14,7 +14,7 @@
  * - Solves the problem of prop-drilling.
  * 
  * - Prop-drilling is the process of passing state as props via
- *   a bunch of components that don't need that prop, so that 
+ *   a several components that don't need that prop, so that 
  *   it can finally reach the component that needs it.
  * 
  * ----- Provider -----
@@ -43,8 +43,10 @@
  *    are properties of that ovject.
  *         
  */
+  
+ /***** Class Based Component Example *****/
 
- /***** Functional Component Example *****/
+ /* !!!!! SEE HOOKS FOR FUNCTIONAL COMPONENT EXAMPLE !!!! */
 
   /**
   * ---------------------------
@@ -156,3 +158,10 @@ Button.defaultProps = {
 }
 
 export default Button
+
+
+
+{/*<div className={`${className} image-container`}>
+            <img src={???} className="image-grid"/>
+        </div>*/}
+
