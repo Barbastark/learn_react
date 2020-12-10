@@ -32,7 +32,9 @@ function Cart() {
         setTimeout(() => {
             setPlacingOrder(false)
             clearCart()
-            alert('Order has been sent haha!!!')
+            setTimeout(() => {
+                alert('Order has been sent haha!!!')
+            }, 1000)
         }, 2000) 
     }
 
@@ -41,14 +43,18 @@ function Cart() {
             <h1>Check out</h1>
             {items}
             <p className="total-cost">Total: {calcTotalCost()}</p>
-            <div className="order-button">
-                <button
-                    disabled={placingOrder} 
-                    onClick={placeOrder}
-                >
-                    {placingOrder ? "Placing order..." : "Place Order"}
-                </button>
-            </div>
+            {
+            cartItems.length > 0 ?    
+                <div className="order-button">
+                        <button
+                            disabled={placingOrder} 
+                            onClick={placeOrder}
+                        >
+                            {placingOrder ? "Placing order..." : "Place Order"}
+                        </button>
+                </div> :
+                <p className="cart-message">Your cart is empty.</p>
+            }
         </main>
     )
 }

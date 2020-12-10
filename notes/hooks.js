@@ -120,13 +120,17 @@ export default App
  * 
  */
 {
-    // Create new ref
+    // Create new ref and give it the initial value of null
     const inputRef = useRef(null)
 
     // Call the focus method to add focus to the element.
     inputRef.current.focus()
 
-    // Adding refs to elements
+    // Adding refs prop to an elements
+    // When elements are rendered useRef returns an object
+    // This object is gonna have a property called .current
+    // .current is a pointer to the dom node
+    // console.log(inputRef) now returns {current: <input type="text" name="todo" value>}
     <input ref={inputRef} />
 }
 /**

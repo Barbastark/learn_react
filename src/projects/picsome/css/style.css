@@ -102,7 +102,11 @@ img.image-grid {
     right: 5px;
     cursor: pointer;
 }
- 
+
+.cart-message {
+    text-align: center;
+}
+
 .wide {
     grid-column: span 2;
 }
